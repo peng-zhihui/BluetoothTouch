@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    tools:context="xyz.pengzhihui.BTremote.MainActivity">
+
+    <LinearLayout
+        android:id="@+id/graph"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <xyz.pengzhihui.BTremote.SquareLinearLayout
+            android:id="@+id/linegraph"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/margin"
+            android:orientation="horizontal" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <CheckBox
+                android:id="@+id/checkBox1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="@string/ch1"/>
+
+            <CheckBox
+                android:id="@+id/checkBox2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/checkBox1"
+                android:checked="true"
+                android:text="@string/ch2"/>
+
+            <CheckBox
+                android:id="@+id/checkBox3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/checkBox2"
+                android:checked="true"
+                android:text="@string/ch3"/>
+
+            <LinearLayout
+                android:id="@+id/dummy"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_centerHorizontal="true"
+                android:orientation="horizontal"
+                android:visibility="invisible"/>
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Y轴范围:"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_alignBaseline="@+id/editText1"
+                android:layout_alignBottom="@+id/editText1"
+                android:layout_toLeftOf="@+id/editText1"
+                android:layout_toStartOf="@+id/editText1"/>
+
+            <EditText
+                android:id="@+id/editText2"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/dummy"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="20dp"
+                android:gravity="center"
+                android:inputType="numberSigned"
+                android:text="200"
+                android:textAlignment="center"
+                android:textSize="15sp"/>
+
+            <EditText
+                android:id="@+id/editText1"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:inputType="numberSigned"
+                android:text="-200"
+                android:textSize="15sp"
+                android:layout_alignBaseline="@+id/textView4"
+                android:layout_alignBottom="@+id/textView4"
+                android:layout_toLeftOf="@+id/textView4"
+                android:layout_toStartOf="@+id/textView4"/>
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="到"
+                android:textSize="14sp"
+                android:layout_alignBaseline="@+id/editText2"
+                android:layout_alignBottom="@+id/editText2"
+                android:layout_toLeftOf="@+id/editText2"
+                android:layout_toStartOf="@+id/editText2"/>
+
+            <ToggleButton
+                android:id="@+id/on_off"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/checkBox3"
+                android:layout_alignLeft="@+id/textView2"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignStart="@+id/textView2"
+                android:layout_marginRight="20dp"
+                android:checked="false"
+                android:textOff="点击开始"
+                android:textOn="点击暂停"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</ScrollView>
