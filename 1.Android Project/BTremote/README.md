@@ -7,7 +7,7 @@
 The code is released under the GNU General Public License.
 _________
 
-This is the code for the Android application to control the Balanduino, the Balancing robot.
+This is the code for the Android application to control the Balanduino, the Balancing robot. 
 
 More information can be found at our Kickstarter campaign: <http://www.kickstarter.com/projects/tkjelectronics/balanduino-balancing-robot-kit>.
 
