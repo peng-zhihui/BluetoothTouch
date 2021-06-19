@@ -1,0 +1,2 @@
+configurations.maybeCreate("default")
+artifacts.add("default", file('viewpagerindicator-2.4.1.aar'))

@@ -1,0 +1,110 @@
+import java.util.regex.Pattern
+
+project.ext {
+    versionCode = '063'
+    versionName = '0.6.3'
+    archivesBaseName = project.name + '-' + project.versionName
+}
+
+task update { // Task to update version in accessory filter
+    def accessoryFile = file('res/xml/accessory_filter.xml')
+    def accessoryText = accessoryFile.getText()
+
+    println 'Updating accessory filter version to: ' + project.versionName
+    def version = Pattern.compile('\"Balanduino\" version=\"(.*?)\"').matcher(accessoryText)
+    accessoryText = version.replaceAll('\"Balanduino\" version=\"' + project.versionName + '\"')
+
+    accessoryFile.write(accessoryText)
+}
+
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 28
+
+    defaultConfig {
+        applicationId "xyz.pengzhihui.BluetoothTouch"
+        minSdkVersion 15
+        targetSdkVersion 28
+        versionName = project.versionName
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+    flavorDimensions "version"
+    productFlavors {
+        basic {
+            dimension "version"
+            minSdkVersion 14
+            versionCode = Integer.parseInt('1000' + project.versionCode)
+        }
+        usb {
+            dimension "version"
+            minSdkVersion 14
+            versionCode = Integer.parseInt('1200' + project.versionCode)
+        }
+    }
+
+    signingConfigs {
+        release
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+        }
+    }
+
+    sourceSets {
+        main {
+            manifest.srcFile 'AndroidManifest.xml'
+            java.srcDirs = ['src']
+            res.srcDirs = ['res']
+        }
+        basic {
+            java.srcDirs = ['flavors/basic/src']
+            res.srcDirs = ['flavors/basic/res']
+        }
+        usb {
+            manifest.srcFile 'flavors/usb/AndroidManifest.xml'
+            java.srcDirs = ['flavors/usb/src']
+            res.srcDirs = ['flavors/usb/res']
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:support-v4:28.0.0'
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    //implementation 'com.jjoe64:graphview:4.2.2'
+    //implementation 'com.viewpagerindicator:viewpagerindicator:2.4.1'
+    //implementation 'com.actionbarsherlock:actionbarsherlock:4.4.0@aar'
+    //usbImplementation 'com.physicaloid:physicaloid:1.0'
+    implementation project(path: ':ViewpagerIndicator')
+    implementation project(path: ':GraphView')
+    usbImplementation project(path: ':PhysicaloidLibrary')
+
+}
+
+// These values are all set in my global gradle.properties file
+if (project.hasProperty('storeFile') && project.hasProperty('storePassword') && project.hasProperty('keyAlias') && project.hasProperty('keyPassword')) {
+    android.signingConfigs.release.storeFile = file(storeFile)
+    android.signingConfigs.release.storePassword = storePassword
+    android.signingConfigs.release.keyAlias = keyAlias
+    android.signingConfigs.release.keyPassword = keyPassword
+} else {
+    android.buildTypes.release.signingConfig = null
+}
+
+// Releasing:
+// 1. Update versionName and versionCode
+// 2. Run './gradlew clean build'
+// 3. Move APK to releases directory
+// 4. Upload to Github and create tag
+//    * Upload APK to release tab on Github as well
+// 5. Upload to Google Play Store
+//    * Also take new screenshots if necessary
+// 6. Update ADK version in Balanduino firmware

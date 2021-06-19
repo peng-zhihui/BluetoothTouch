@@ -1,0 +1,2 @@
+include ':BluetoothTouch', ':ViewpagerIndicator', ':GraphView', ':PhysicaloidLibrary'
+//rootProject.name=' '

@@ -1,0 +1,19 @@
+language: android
+
+sudo: false
+
+android:
+  components:
+    # Use the latest revision of Android SDK Tools
+    - platform-tools
+    - tools
+
+    # The BuildTools version used by your project
+    - build-tools-22.0.1
+
+    # The SDK version used to compile your project
+    - android-22
+
+    # Additional components
+    - extra
+    - addon
