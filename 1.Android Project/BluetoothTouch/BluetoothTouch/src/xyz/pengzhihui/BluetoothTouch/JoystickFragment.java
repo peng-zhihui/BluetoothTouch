@@ -113,14 +113,14 @@ public class JoystickFragment extends Fragment implements JoystickView.OnJoystic
                 if (MainActivity.mChatService == null)
                     return;
 
-                if (MainActivity.mChatService.getState() == BluetoothChatService.STATE_CONNECTED){// && BalanduinoActivity.checkTab(ViewPagerAdapter.JOYSTICK_FRAGMENT)) {
+                if (MainActivity.mChatService.getState() == BluetoothChatService.STATE_CONNECTED) {// && BalanduinoActivity.checkTab(ViewPagerAdapter.JOYSTICK_FRAGMENT)) {
                     if (!getResources().getBoolean(R.bool.isTablet) || !MainActivity.buttonState) { // Don't send stop if the button in the IMU fragment is pressed
                         if (joystickReleased || (xValue == 0 && yValue == 0))
                             MainActivity.mChatService.write(MainActivity.sendStop);
                         else {
                             String message = MainActivity.sendJoystickValues + d.format(xValue) + ',' + d.format(yValue) + ";";
                             MainActivity.mChatService.write(message);
-                            Log.d("pzhh", "run: "+message);
+                            Log.d("pzhh", "run: " + message);
                         }
                     }
                 }
